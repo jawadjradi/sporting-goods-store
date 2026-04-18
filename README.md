@@ -1,170 +1,243 @@
-# APEX Sporting Goods Store
+# 🏅 Sporting Goods Store — Team Syntax
 
-APEX is a single-page ecommerce storefront built for a sporting goods catalogue. It covers the standard customer flow from browsing products to checkout, and it also includes a protected admin area for managing stock, orders, categories, and reviews.
+> CSC 490: Software Engineering
+> Dr. Ramzi Haraty — Lebanese American University
 
-The frontend is built with React, TypeScript, and Vite. Firebase is used for authentication, Firestore data storage, and file storage.
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6)
+![Firebase](https://img.shields.io/badge/Firebase-Backend-orange)
+![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![License](https://img.shields.io/badge/License-Academic-lightgrey)
 
-## Project Details
+---
 
-### What the app includes
+## 👥 Team Members
 
-- Product browsing with category and sport-based discovery
-- Product detail pages
-- Cart management with local persistence
-- Email/password and Google sign-in
-- Protected checkout, orders, and profile pages
-- Admin dashboard with product, order, inventory, category, and review management
-- Firestore-backed product and order data
+| Name | Student ID | Role |
+|------|------------|------|
+| Jawad Jradi | 202306322 | Authentication, Routing, Reviews UI |
+| Mustafa Kassem Hammoud | 202308271 | Product Catalog, Admin Products UI |
+| Dani Hmaidan | 202405448 | Cart, Checkout, Filters, Product Detail |
+| Kassem Nader | 202300068 | Admin Dashboard, Orders, Inventory |
 
-### Stack
+---
 
-- React 19
-- TypeScript
-- Vite
-- React Router
-- Firebase Authentication
-- Cloud Firestore
-- Firebase Storage
-- Framer Motion
+## 🌐 Live Demo
 
-### Main routes
+🔗 **https://sporting-goods-30f8b.web.app**
 
-- `/` - landing page and featured products
-- `/products` - product listing
-- `/products/:id` - product details
-- `/cart` - shopping cart
-- `/checkout` - protected checkout flow
-- `/orders` - logged-in customer orders
-- `/profile` - logged-in customer profile
-- `/admin` - protected admin area
+> The application is fully deployed and accessible. No installation required to view the live version.
 
-## Setup Instructions
+---
 
-### 1. Install dependencies
+## 📋 Project Description
 
-```bash
-npm install
+A modern, full-stack web-based e-commerce platform for a Sporting Goods Store, developed as part of CSC 490: Software Engineering at the Lebanese American University.
+
+The system provides two distinct interfaces:
+- **Customer (Buyer):** Browse, search, filter, and purchase sporting products across multiple sports and equipment categories.
+- **Administrator:** Manage the full product catalog, monitor inventory, process orders, and moderate customer reviews through a centralized admin panel.
+
+The application uses Firebase as its backend, handling authentication, real-time database operations, file storage, and hosting — eliminating the need for a traditional server. All transactions are processed via Cash on Delivery (COD) or order confirmation, as per the project requirements.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Frontend Framework | React 19 + TypeScript | Component-based UI with type safety |
+| Build Tool | Vite | Fast development server and bundler |
+| Styling | CSS Modules + Framer Motion | Responsive design and animations |
+| Authentication | Firebase Auth | Email/password and Google sign-in |
+| Database | Firebase Firestore | Real-time NoSQL document database |
+| File Storage | Firebase Storage | Product image uploads |
+| Hosting | Firebase Hosting | Production deployment |
+| Icons | Lucide React, React Icons | UI iconography |
+| Routing | React Router DOM v7 | Client-side navigation |
+
+---
+
+## ✅ Implemented Features
+
+### 🛒 Customer (Buyer)
+- Register and log in via Email/Password or Google
+- Browse products by sport (Running, Basketball, Football, Tennis, Swimming, Training)
+- Filter by category (Shoes, Apparel, Equipment, Accessories)
+- Filter by price range
+- Search products by name, brand, or description
+- Sort products by name, price, or rating
+- View detailed product pages with images, ratings, and reviews
+- Submit product reviews with star ratings
+- Add products to cart, update quantities, remove items
+- Checkout with full shipping address form
+- Automatic stock reduction on order placement
+- View complete order history with status tracking
+- Manage user profile (display name, account info)
+
+### 🛠️ Administrator
+- Dashboard with real-time statistics: total products, active orders, revenue, low-stock alerts
+- Add new products (name, description, price, images, sport, category, brand, stock)
+- Edit and delete existing products
+- Manage sports and equipment categories (add, edit, delete)
+- View all customer orders with buyer details
+- Update order status: Pending → Processing → Completed / Cancelled
+- Inventory management with low-stock threshold warnings
+- Inventory logs tracking every stock change event
+- View and delete customer reviews (moderation)
+
+---
+
+## 📁 Project Structure
+
+```
+sporting-goods-store/
+├── public/                  # Static assets (favicon, icons)
+├── src/
+│   ├── assets/              # Images and static files
+│   ├── components/
+│   │   ├── Navbar/          # Navigation bar with cart badge and auth state
+│   │   ├── Footer/          # Site footer
+│   │   ├── HeroBackground/  # Animated 3D hero section
+│   │   └── ProtectedRoute   # Route guard for auth and admin access
+│   ├── context/
+│   │   ├── AuthContext.tsx  # Firebase auth state, login, register, Google sign-in
+│   │   └── CartContext.tsx  # Cart state management (add, update, remove, total)
+│   ├── pages/
+│   │   ├── Home/            # Landing page with featured products and sports grid
+│   │   ├── Products/        # Product listing with filters + product detail page
+│   │   ├── Cart/            # Shopping cart page
+│   │   ├── Checkout/        # Checkout form and order placement
+│   │   ├── Orders/          # Order history for buyers
+│   │   ├── Profile/         # User profile management
+│   │   ├── Auth/            # Login and registration pages
+│   │   └── Admin/           # Full admin panel (dashboard, products, orders, inventory, reviews)
+│   ├── config/
+│   │   └── firebase.ts      # Firebase app initialization and service exports
+│   ├── types/
+│   │   └── index.ts         # TypeScript interfaces (User, Product, Order, Review, etc.)
+│   ├── styles/
+│   │   └── globals.css      # Global CSS variables and shared styles
+│   ├── App.tsx              # Root component with routing configuration
+│   └── main.tsx             # Application entry point
+├── database/
+│   └── SEED_DATA.md         # Sample product data for initial setup
+├── firestore.rules          # Firestore security rules (RBAC)
+├── firestore.indexes.json   # Composite Firestore indexes
+├── firebase.json            # Firebase hosting configuration
+├── vite.config.ts           # Vite build configuration
+├── tsconfig.json            # TypeScript configuration
+└── package.json             # Project dependencies and scripts
 ```
 
-### 2. Start the development server
+---
+
+## 🚀 Setup Instructions
+
+### Prerequisites
+
+- Node.js v18 or higher
+- npm v9 or higher
+- A modern web browser
+
+### Installation
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/jawadjradi/sporting-goods-store.git
+
+# 2. Navigate into the project directory
+cd sporting-goods-store
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
 ```
 
-Vite will print a local development URL in the terminal, usually `http://localhost:5173`.
+Open **http://localhost:5173** in your browser.
 
-### 3. Build for production
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-### 4. Preview the production build locally
+### Deploy to Firebase Hosting
 
 ```bash
-npm run preview
+npm run build
+firebase deploy
 ```
 
-### 5. Lint the codebase
+---
 
-```bash
-npm run lint
-```
+## ▶️ Usage Guide
 
-## Firebase Setup
+### Customer Flow
+1. Visit the live site or run locally
+2. Click **Sign In** → Register a new account or continue with Google
+3. Browse the homepage or click **Products** to explore the full catalog
+4. Use the sidebar filters to narrow by sport, category, or price
+5. Click any product to view its detail page
+6. Click **Add to Cart** → review your cart → proceed to **Checkout**
+7. Fill in your shipping address → click **Place Order**
+8. View your order under **Orders** in the navbar
 
-This project already contains a Firebase configuration in the source code, so it will connect to the configured Firebase project as-is.
+### Admin Flow
+1. Log in with an admin account (see Admin Access below)
+2. Click **Admin** in the navbar to access the admin panel
+3. Use the sidebar to navigate: Dashboard / Products / Orders / Inventory / Categories / Reviews
+4. Add or edit products using the product form
+5. Update order statuses from the Orders panel
+6. Monitor and adjust stock levels from the Inventory panel
+7. Delete inappropriate reviews from the Reviews panel
 
-If you want to point it at a different Firebase project:
+---
 
-1. Create a Firebase project.
-2. Enable Authentication.
-3. Enable Firestore Database.
-4. Enable Storage if you plan to use uploaded product images.
-5. Replace the config values in `src/config/firebase.ts` with your own project settings.
+## 🔑 Admin Access
 
-### Authentication providers
+To grant admin privileges to a user:
 
-The app supports:
+1. Go to [Firebase Console](https://console.firebase.google.com)
+2. Select project **sporting-goods-30f8b**
+3. Navigate to **Firestore Database → users collection**
+4. Find the user document by their email
+5. Edit the `role` field: change `"customer"` → `"admin"`
+6. Log out and back in on the site — the Admin link will appear in the navbar
 
-- Email and password sign-in
-- Google sign-in
+---
 
-If you use a new Firebase project, make sure both providers are enabled in Firebase Authentication.
+## 🔒 Security
 
-### Firestore data expected by the app
+Firestore Security Rules enforce role-based access control (RBAC):
 
-The app reads and writes to collections such as:
+| Collection | Public Read | Authenticated Write | Admin Only |
+|------------|-------------|----------------------|------------|
+| products | ✅ | ❌ | ✅ |
+| orders | ❌ | ✅ (own) | ✅ (all) |
+| reviews | ✅ | ✅ (create) | ✅ (delete) |
+| users | ❌ | ✅ (own) | ✅ |
+| inventoryLogs | ❌ | ❌ | ✅ |
+| taxonomies | ✅ | ❌ | ✅ |
 
-- `products`
-- `orders`
-- `users`
-- `inventoryLogs`
-- `reviews`
+---
 
-## Seed Data
+## 📄 Project Phases
 
-You have two ways to populate products for development.
+| Phase | Title | Description |
+|-------|-------|-------------|
+| Phase I | Requirements & Architecture | User requirements, system architecture, glossary |
+| Phase II | System Models & Design | Use case diagrams, activity diagrams, ERD, database schema |
+| Phase III | Test Cases | Functional and non-functional test cases |
+| Phase IV | Implementation | Full system implementation (this repository) |
 
-### Option 1. Use the seed script
+---
 
-```bash
-node scripts/seed.mjs
-```
+## 🔗 Links
 
-This inserts sample sporting goods products into Firestore.
-
-### Option 2. Add products through the admin panel
-
-If you prefer to enter products manually, the admin UI supports creating and editing products directly in the browser.
-
-Additional notes and sample product data are documented in `SEED_DATA.md`.
-
-## Admin Setup
-
-New users are created with the `customer` role by default.
-
-To create an admin account:
-
-1. Register a user through the app.
-2. Open the Firebase Console.
-3. Go to Firestore and locate that user's document in the `users` collection.
-4. Change the `role` field from `customer` to `admin`.
-5. Sign in again and open `/admin`.
-
-## Usage Information
-
-### Customer flow
-
-1. Open the home page and browse featured products or jump into the full catalogue.
-2. Filter into a sport or open a product detail page.
-3. Add items to the cart.
-4. Register or sign in before checkout.
-5. Complete the shipping form and place the order.
-6. Review previous orders from the orders page.
-
-### Admin flow
-
-1. Sign in with an account that has the `admin` role.
-2. Open `/admin`.
-3. Use the dashboard to review product count, order count, revenue, and low-stock items.
-4. Create, edit, or delete products.
-5. Review order data and inventory-related entries.
-
-## Scripts
-
-- `npm run dev` - start the Vite development server
-- `npm run build` - type-check and create a production build
-- `npm run preview` - preview the production build locally
-- `npm run lint` - run ESLint
-
-## Notes
-
-- Cart data is stored in local storage under the `apex-cart` key.
-- Checkout creates an order in Firestore and reduces stock for each purchased item.
-- If Firestore is empty, the homepage can load without featured products until data is added.
-
-## Development Status
-
-This repository is structured as a working university project rather than a fully productized storefront. The current setup is enough to demo the main ecommerce flow locally, especially once Firebase services and sample data are in place.
+- **Live Application:** https://sporting-goods-30f8b.web.app
+- **GitHub Repository:** https://github.com/jawadjradi/sporting-goods-store
+- **Course:** CSC 490 — Software Engineering, Lebanese American University
